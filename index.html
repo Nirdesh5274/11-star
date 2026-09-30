@@ -325,13 +325,23 @@
       vertical-align: top;
     }
 
+    .menu-toggle {
+      display: none;
+    }
+
     @media (max-width: 600px) {
       body {
         margin-top: 0;
-        padding-top: 190px;
+        padding-top: 106px;
+        transition: padding-top 0.25s ease;
+      }
+
+      body.menu-open {
+        padding-top: 270px;
       }
 
       header {
+        position: fixed;
         padding: 10px 12px 12px;
       }
 
@@ -356,11 +366,54 @@
         margin-top: 2px !important;
       }
 
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        top: 25px;
+        right: 12px;
+        width: 44px;
+        height: 40px;
+        padding: 8px;
+        flex-direction: column;
+        justify-content: space-between;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 7px;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        border-radius: 3px;
+        background: #fff;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      .menu-toggle[aria-expanded="true"] span:first-child {
+        transform: translateY(10px) rotate(45deg);
+      }
+
+      .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle[aria-expanded="true"] span:last-child {
+        transform: translateY(-10px) rotate(-45deg);
+      }
+
       header nav {
+        display: none;
+        margin-top: 12px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      header nav.is-open {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 4px 8px;
-        margin-top: 10px;
       }
 
       header nav a {
@@ -446,6 +499,11 @@
     <h1 style="color: red;">11 Star Club</h1> <!-- Main Heading -->
     <h2 style="font-size: 1.2em; margin-top: 5px;">Since 2008</h2> <!-- Subtitle -->
   </div>
+ <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
  <nav>
       <a href="#home" id="homeLink">Home</a>
       <a href="#about-us">About Us</a>
@@ -592,6 +650,25 @@ thank you
     const logoutLink = document.getElementById("logoutLink");
     const loginLink = document.getElementById("loginLink");
     const homeLink = document.getElementById("homeLink");
+    const menuToggle = document.getElementById("menuToggle");
+    const navigation = document.querySelector("header nav");
+
+    menuToggle.addEventListener("click", function() {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+      navigation.classList.toggle("is-open", !isOpen);
+      document.body.classList.toggle("menu-open", !isOpen);
+    });
+
+    navigation.querySelectorAll("a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+        navigation.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+      });
+    });
 
     // Event Listener for Login Form
     loginForm.addEventListener("submit", function(event) {
