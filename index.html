@@ -318,6 +318,118 @@
       border: 0;
     }
 
+    header .brand {
+      display: inline-block;
+      margin-left: 20px;
+      color: #fff;
+      vertical-align: top;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        margin-top: 0;
+        padding-top: 190px;
+      }
+
+      header {
+        padding: 10px 12px 12px;
+      }
+
+      header .logo {
+        width: 82px;
+        float: none;
+        vertical-align: middle;
+      }
+
+      header .brand {
+        margin-left: 8px;
+        max-width: calc(100% - 100px);
+      }
+
+      header .brand h1 {
+        font-size: 1.65em;
+        line-height: 1.1;
+      }
+
+      header .brand h2 {
+        font-size: 1em !important;
+        margin-top: 2px !important;
+      }
+
+      header nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px 8px;
+        margin-top: 10px;
+      }
+
+      header nav a {
+        margin-left: 0;
+        padding: 7px 4px;
+        font-size: 0.95em;
+        text-align: center;
+        border-radius: 8px;
+      }
+
+      .main-content {
+        width: auto;
+        margin: 24px 12px 30px;
+        display: block;
+      }
+
+      .about-ngo,
+      .members,
+      .login,
+      .location {
+        padding: 22px 16px;
+        margin-top: 24px;
+        border-radius: 10px;
+      }
+
+      .about-ngo h2,
+      .members h2,
+      .login h2,
+      .location h2 {
+        font-size: 2em;
+        margin-bottom: 12px;
+      }
+
+      .about-ngo p,
+      .location p {
+        font-size: 1.05em;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .members ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 10px;
+      }
+
+      .members li {
+        font-size: 1em;
+      }
+
+      .members li img {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 8px;
+      }
+
+      .map-container {
+        height: 280px;
+      }
+
+      footer {
+        margin-top: 30px;
+        padding: 16px 10px;
+      }
+    }
+
 
 
   </style>
@@ -330,7 +442,7 @@
  <header>
   <img src="l.jpeg" alt="11 Star Club Logo" class="logo">
 
-  <div style="display: inline-block; margin-left: 20px; color: #fff;">
+  <div class="brand">
     <h1 style="color: red;">11 Star Club</h1> <!-- Main Heading -->
     <h2 style="font-size: 1.2em; margin-top: 5px;">Since 2008</h2> <!-- Subtitle -->
   </div>
